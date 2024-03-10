@@ -24,7 +24,7 @@ modules:
         sources:
           - type: git
             url: https://github.com/FeralInteractive/gamemode
-            tag: "1.8.1"
+            tag: 1.8.1
             x-checker-data:
               type: git
               tag-pattern: ^([\\d.]+)$
@@ -38,8 +38,8 @@ modules:
           project-id: 10885
           url-template: https://github.com/HaxeFoundation/neko/releases/download/v$version/neko-$version-linux64.tar.gz
       - type: archive
-        url: https://github.com/HaxeFoundation/haxe/releases/download/4.3.3/haxe-4.3.3-linux64.tar.gz
-        sha256: ee7dbdad1dbceb0f36a2453cfe36a1310a1b7df4f134f6a8d5d77951edaa18c8
+        url: https://github.com/HaxeFoundation/haxe/releases/download/4.3.4/haxe-4.3.4-linux64.tar.gz
+        sha256: 0b93644aaabab818b5922c060401597536cf8aea7f0a995c6943986c45f297b5
         dest: haxe/
         x-checker-data:
           type: anitya
