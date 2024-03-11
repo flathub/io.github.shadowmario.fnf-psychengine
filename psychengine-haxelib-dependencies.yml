@@ -29,8 +29,8 @@
       version-query: .[0].name
       url-query: .[0].zipball_url
   - type: file
-    url: https://api.github.com/repos/HaxeFlixel/flixel-addons/zipball/refs/tags/3.2.1
-    sha256: 106d37a2942a1ee7a482824b6b2bf772e3995f8d5e76d93bc5afe2171072e744
+    url: https://api.github.com/repos/HaxeFlixel/flixel-addons/zipball/refs/tags/3.2.2
+    sha256: ba048fce4da59d386697b280bc479f07fbff7575448fe75595d57361cd80bd12
     dest: psychengine-deps/
     dest-filename: flixel-addons-3.2.1.zip
     x-checker-data:
