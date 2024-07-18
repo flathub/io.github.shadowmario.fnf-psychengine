@@ -71,30 +71,30 @@
 
 # These dependencies use no tags in their git repositories; commit hashes identified from release dates of versions on lib.haxe.org.
   - type: file
-    url: https://github.com/polybiusproxy/hxCodec/archive/59ce797f28d39dc96fa67ff589d87d16b17d03ef.zip
-    sha256: c9b5b7fa07f89b5943a23a031d097cf1e6416d56ab2365fd9ab1405e3c7a6a08
+    url: https://lib.haxe.org/p/hxCodec/3.0.2/download/
+    sha256: 1cc490fb667c321b85772a7912876495163ebca460f8419af17702c7f3d462fe
     dest: psychengine-deps/
     dest-filename: hxCodec-3.0.2.zip
   - type: file
-    url: https://github.com/ToprakKarabekiroglu/SuperlativeScript/archive/f42a8f1d715d0c6bc601cb41c59470ffe75e6ca2.zip
+    url: https://lib.haxe.org/p/SScript/10.1.618/download/
     sha256: 3707e8070458a29f4bd98ecb418d700e22833eda224a3c98d74bc1075d013c11
     dest: psychengine-deps/
-    dest-filename: SScript-10.1.168.zip
+    dest-filename: SScript-10.1.618.zip
   - type: file
     url: https://github.com/JWambaugh/TJSON/archive/e9f93b9cd98e5becd63d219371d5e395b176e6c1.zip
     sha256: 90ea73553b378ac2d64a387dd16ec3c8da1488134da1a613642fe0c46d059ce1
     dest: psychengine-deps/
-    dest-filename: tjson-1.4.0.zip
+    dest-filename: tjson-e9f93b9.zip
   - type: file
     url: https://github.com/ShadowMario/flxanimate/archive/6d11b11f65f822a2a2ad01018fa8bcea0437bf5a.zip
     sha256: 7293d247b5a82abda2c4084922a5513c416d83f1b0857391f45848bbbcad3364
     dest: psychengine-deps/
-    dest-filename: flxanimate-7293d247.zip
+    dest-filename: flxanimate-6d11b11.zip
   - type: file
     url: https://github.com/superpowers04/linc_luajit/archive/633fcc051399afed6781dd60cbf30ed8c3fe2c5a.zip
     sha256: b1c49b0aa526541b4c5aadadc62f2790f43eab50ad4b5da97758e79d7c02c604
     dest: psychengine-deps/
-    dest-filename: linc_luajit-b1c49b0a.zip
+    dest-filename: linc_luajit-633fcc0.zip
 
 # hxdiscord_rpc further depends on discord-rpc and rapidjson submodules.
   - type: file
