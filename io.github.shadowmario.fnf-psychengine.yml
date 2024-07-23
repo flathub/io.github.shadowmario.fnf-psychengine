@@ -38,8 +38,8 @@ modules:
           project-id: 10885
           url-template: https://github.com/HaxeFoundation/neko/releases/download/v$version/neko-$version-linux64.tar.gz
       - type: archive
-        url: https://github.com/HaxeFoundation/haxe/releases/download/4.3.4/haxe-4.3.4-linux64.tar.gz
-        sha256: 0b93644aaabab818b5922c060401597536cf8aea7f0a995c6943986c45f297b5
+        url: https://github.com/HaxeFoundation/haxe/releases/download/4.3.5/haxe-4.3.5-linux64.tar.gz
+        sha256: 382b57cb877a4edfd9bef997e910ab3dfafdcb5887b5d45b93161fcc246d808b
         dest: haxe/
         x-checker-data:
           type: anitya
@@ -78,6 +78,7 @@ modules:
       # build
       - |
         export PATH=$PATH:$(pwd)/haxe
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/haxe
         haxelib setup ./setup
         for filename in psychengine-deps/*; do haxelib install $filename && rm $filename; done
         ./haxe/haxelib run lime build Project.xml linux
