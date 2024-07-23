@@ -78,6 +78,7 @@ modules:
       # build
       - |
         export PATH=$PATH:$(pwd)/haxe
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/haxe
         haxelib setup ./setup
         for filename in psychengine-deps/*; do haxelib install $filename && rm $filename; done
         ./haxe/haxelib run lime build Project.xml linux
