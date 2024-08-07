@@ -38,8 +38,8 @@ modules:
           project-id: 10885
           url-template: https://github.com/HaxeFoundation/neko/releases/download/v$version/neko-$version-linux64.tar.gz
       - type: archive
-        url: https://github.com/HaxeFoundation/haxe/releases/download/4.3.5/haxe-4.3.5-linux64.tar.gz
-        sha256: 382b57cb877a4edfd9bef997e910ab3dfafdcb5887b5d45b93161fcc246d808b
+        url: https://github.com/HaxeFoundation/haxe/releases/download/4.3.6/haxe-4.3.6-linux64.tar.gz
+        sha256: 810e1752c8eb3065dbff54c050b20a712ce276f407741f0bf94696b454a597ad
         dest: haxe/
         x-checker-data:
           type: anitya
