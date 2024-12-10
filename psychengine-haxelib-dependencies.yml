@@ -49,8 +49,8 @@
       version-query: .[0].name
       url-query: .[0].zipball_url
   - type: file
-    url: https://api.github.com/repos/HaxeFlixel/flixel-ui/zipball/refs/tags/2.6.1
-    sha256: fa28321c5233f04fde22f8b5c870cb3fdca43c50abd62d1d9fce0e33c58dd973
+    url: https://api.github.com/repos/HaxeFlixel/flixel-ui/zipball/refs/tags/2.6.2
+    sha256: c7a3c3205e6a3084a7e10de5d179b078d3215ae1c2d2af2e39f1a1ecbb17aeb0
     dest: psychengine-deps/
     dest-filename: flixel-ui-2.5.0.zip
     x-checker-data:
