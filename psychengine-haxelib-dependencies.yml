@@ -76,8 +76,8 @@
     dest: psychengine-deps/
     dest-filename: hxCodec-3.0.2.zip
   - type: file
-    url: https://lib.haxe.org/p/SScript/10.1.618/download/
-    sha256: d81e02e171913ba4da464ea6ccf7ac339cfe2d2d944ac52cc4d868ced47812e1
+    url: https://github.com/CCobaltDev/SScript-Archive/raw/refs/heads/main/archives/SScript-10,0,618-beta.zip
+    sha256: 599962ed1f86c351fbb46fc24f75690576c3ad6dc87404a10e8ab6766f51ee53
     dest: psychengine-deps/
     dest-filename: SScript-10.1.618.zip
   - type: file
