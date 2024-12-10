@@ -8,6 +8,7 @@ finish-args:
   # gamepad support
   - --device=all
   # desktop access
+  - --share=ipc
   - --socket=fallback-x11
   - --socket=wayland
   # Audio
