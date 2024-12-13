@@ -19,8 +19,8 @@
       version-query: .tag_name
       url-query: .assets[] | select(.name==\"openfl-haxelib.zip\") | .browser_download_url
   - type: file
-    url: https://api.github.com/repos/HaxeFlixel/flixel/zipball/refs/tags/5.8.0
-    sha256: c747811e666c5397352d1894f6db1cdc7221c3dd2ad8e14d0d689cc3d2dcb9e3
+    url: https://api.github.com/repos/HaxeFlixel/flixel/zipball/refs/tags/5.9.0
+    sha256: 3edfdc766293eda247212a240c5d90c08ea0bc5dedc34fc010cc0583aa878996
     dest: psychengine-deps/
     dest-filename: flixel-5.6.2.zip
     x-checker-data:
@@ -49,8 +49,8 @@
       version-query: .[0].name
       url-query: .[0].zipball_url
   - type: file
-    url: https://api.github.com/repos/HaxeFlixel/flixel-ui/zipball/refs/tags/2.6.2
-    sha256: c7a3c3205e6a3084a7e10de5d179b078d3215ae1c2d2af2e39f1a1ecbb17aeb0
+    url: https://api.github.com/repos/HaxeFlixel/flixel-ui/zipball/refs/tags/2.6.3
+    sha256: d37df37a0af21cb003ded40ccb8c7240d19bd62a903c45355b647ede9a245435
     dest: psychengine-deps/
     dest-filename: flixel-ui-2.5.0.zip
     x-checker-data:
