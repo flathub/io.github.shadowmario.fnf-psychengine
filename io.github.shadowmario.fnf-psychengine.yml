@@ -7,9 +7,10 @@ command: io.github.shadowmario.fnf-psychengine.sh
 finish-args:
   # gamepad support
   - --device=all
-  # X11 + XShm access
+  # desktop access
   - --share=ipc
-  - --socket=x11
+  - --socket=fallback-x11
+  - --socket=wayland
   # Audio
   - --socket=pulseaudio
 
