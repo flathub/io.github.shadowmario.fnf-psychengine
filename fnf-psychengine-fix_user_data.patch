@@ -68,10 +68,10 @@ index eb78142..abd1dfc 100644
 @@ -469,7 +469,7 @@ class Paths
  
  	#if MODS_ALLOWED
- 	inline static public function mods(key:String = '') {
+ 	inline static public function mods(key:String = '')
 -		return 'mods/' + key;
 +		return Sys.getEnv("XDG_DATA_HOME") + '/mods/' + key;
- 	}
+
  
  	inline static public function modsFont(key:String) {
 diff --git a/source/states/ModsMenuState.hx b/source/states/ModsMenuState.hx

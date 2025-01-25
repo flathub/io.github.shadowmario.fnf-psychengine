@@ -1,6 +1,6 @@
 app-id: io.github.shadowmario.fnf-psychengine
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: io.github.shadowmario.fnf-psychengine.sh
 
@@ -14,21 +14,29 @@ finish-args:
   # Audio
   - --socket=pulseaudio
 
+build-options:
+  append-path: /run/build/fnf-psychengine/haxe
+  append-ld-library-path: /run/build/fnf-psychengine/haxe
+
 modules:
+  - shared-modules/glew/glew.json
+  - shared-modules/glu/glu-9.json
+  - name: gamemode
+    buildsystem: meson
+    config-opts:
+      - -Dwith-sd-bus-provider=no-daemon
+      - -Dwith-examples=false
+    sources:
+      - type: archive
+        url: https://api.github.com/repos/FeralInteractive/gamemode/zipball/refs/tags/1.8.1
+        sha256: bff0cedfc074d34aa5fbc8c5b13305a0813db97a5a0eae48661acfc4b3c4ea9b
+        dest-filename: feral-gamemode.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/FeralInteractive/gamemode/tags
+          version-query: .[0].name
+          url-query: .[0].zipball_url
   - name: fnf-psychengine
-    modules:
-      - name: gamemode
-        buildsystem: meson
-        config-opts:
-          - -Dwith-sd-bus-provider=no-daemon
-          - -Dwith-examples=false
-        sources:
-          - type: git
-            url: https://github.com/FeralInteractive/gamemode
-            tag: 1.8.1
-            x-checker-data:
-              type: git
-              tag-pattern: ^([\\d.]+)$
     sources:
       - type: archive
         url: https://github.com/HaxeFoundation/neko/releases/download/v2-3-0/neko-2.3.0-linux64.tar.gz
@@ -48,19 +56,148 @@ modules:
           url-template: https://github.com/HaxeFoundation/haxe/releases/download/$version/haxe-$version-linux64.tar.gz
 
       # Haxe packages used by PsychEngine
-      - psychengine-haxelib-dependencies.yml
+      - type: file
+        url: https://github.com/openfl/lime/releases/download/8.2.1/lime-haxelib.zip
+        sha256: 5d26b7b6fe68b99124eae8bd56bd0ddb7cb76cc8c2780280044fbf294918ac24
+        dest: psychengine-deps/
+        dest-filename: lime.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/openfl/lime/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name==\"lime-haxelib.zip\") | .browser_download_url
+      - type: file
+        url: https://github.com/openfl/openfl/releases/download/9.3.2/openfl-haxelib.zip
+        sha256: 9e8cbc475c0cc68075ef4b9a37577c7cb3ae1eab4e594645c7d31908d4a0cbd9
+        dest: psychengine-deps/
+        dest-filename: openfl.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/openfl/openfl/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name==\"openfl-haxelib.zip\") | .browser_download_url
+      - type: file
+        url: https://api.github.com/repos/HaxeFlixel/flixel/zipball/refs/tags/5.6.1
+        sha256: b02adef85f5f10820dbd8bc459214bfee945ec881475c4b7335ac550d891a477
+        dest: psychengine-deps/
+        dest-filename: flixel.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/HaxeFlixel/flixel/tags
+          version-query: .[0].name
+          url-query: .[0].zipball_url
+      - type: file
+        url: https://api.github.com/repos/HaxeFlixel/flixel-addons/zipball/refs/tags/3.2.2
+        sha256: ba048fce4da59d386697b280bc479f07fbff7575448fe75595d57361cd80bd12
+        dest: psychengine-deps/
+        dest-filename: flixel-addons.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/HaxeFlixel/flixel-addons/tags
+          version-query: .[0].name
+          url-query: .[0].zipball_url
+      - type: file
+        url: https://api.github.com/repos/HaxeFlixel/flixel-tools/zipball/refs/tags/1.5.1
+        sha256: dcf1e8a4de16ecb9b6c1ca5093bb0c0c04097e660275f5eed76f6026a897dca0
+        dest: psychengine-deps/
+        dest-filename: flixel-tools.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/HaxeFlixel/flixel-tools/tags
+          version-query: .[0].name
+          url-query: .[0].zipball_url
+      - type: file
+        url: https://api.github.com/repos/HaxeFlixel/flixel-ui/zipball/refs/tags/2.6.2
+        sha256: c7a3c3205e6a3084a7e10de5d179b078d3215ae1c2d2af2e39f1a1ecbb17aeb0
+        dest: psychengine-deps/
+        dest-filename: flixel-ui.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/HaxeFlixel/flixel-ui/tags
+          version-query: .[0].name
+          url-query: .[0].zipball_url
+      - type: file
+        url: https://github.com/HaxeFoundation/hxcpp/releases/download/v4.3.21/hxcpp-4.3.21.zip
+        sha256: 0ba282f6807067055d5c80a74263d7784b1c691a71c3f19f37b932883e466031
+        dest: psychengine-deps/
+        dest-filename: hxcpp.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/HaxeFoundation/hxcpp/releases/latest
+          version-query: .tag_name | sub(\"^v\"; \"\")
+          url-query: .assets[] | select(.name==\"hxcpp-\" + $version + \".zip\") | .browser_download_url
+      - type: file
+        url: https://github.com/CCobaltDev/SScript-Archive/raw/refs/heads/main/archives/SScript-10,0,618-beta.zip
+        sha256: 599962ed1f86c351fbb46fc24f75690576c3ad6dc87404a10e8ab6766f51ee53
+        dest: psychengine-deps/
+        dest-filename: SScript.zip
+      - type: file
+        url: https://api.github.com/repos/Dot-Stuff/flxanimate/zipball/refs/tags/v4.0.0
+        sha256: 1e1f3615d1f686c66e33a5c26391ab88b40083ea848754e55aa0bdd539551ead
+        dest: psychengine-deps/
+        dest-filename: flxanimate.zip
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Dot-Stuff/flxanimate/tags
+          version-query: .[0].name
+          url-query: .[0].zipball_url
+
+      # These dependencies use no tags in their git repositories; commit hashes
+      # identified from release dates of versions on lib.haxe.org.
+      - type: file
+        url: https://lib.haxe.org/p/hxCodec/3.0.2/download/
+        sha256: 1cc490fb667c321b85772a7912876495163ebca460f8419af17702c7f3d462fe
+        dest: psychengine-deps/
+        dest-filename: hxCodec.zip
+      - type: file
+        url: https://github.com/JWambaugh/TJSON/archive/e9f93b9cd98e5becd63d219371d5e395b176e6c1.zip
+        sha256: 90ea73553b378ac2d64a387dd16ec3c8da1488134da1a613642fe0c46d059ce1
+        dest: psychengine-deps/
+        dest-filename: tjson.zip
+      - type: file
+        url: https://github.com/superpowers04/linc_luajit/archive/633fcc051399afed6781dd60cbf30ed8c3fe2c5a.zip
+        sha256: b1c49b0aa526541b4c5aadadc62f2790f43eab50ad4b5da97758e79d7c02c604
+        dest: psychengine-deps/
+        dest-filename: linc_luajit.zip
+      - type: file
+        url: https://lib.haxe.org/p/hscript-iris/1.1.0/download/
+        sha256: a63c3ab1677ab7a0988c75b5ec11b7596a9b6198efebe86e6e51267b79f99caf
+        dest: psychengine-deps/
+        dest-filename: hscript-iris.zip
 
       # Main PsychEngine repo
-      - type: git
-        url: https://github.com/ShadowMario/FNF-PsychEngine.git
-        # tag: "0.7.3"
-        commit: d64912e57120e27dc41304deae48097b6c1355d1
+      - type: archive
+        url: https://api.github.com/repos/ShadowMario/FNF-PsychEngine/zipball/refs/tags/1.0
+        dest-filename: psychengine.zip
+        sha256: 5ada5ffa2d499a84a1b0e50d345a15366db87c0837ef23daeb1c72aa536fc8f5
         x-checker-data:
-          type: git
-          tag-pattern: ^([\\d.]+)$
-      # temporary fix for broken build in the repo (https://github.com/ShadowMario/FNF-PsychEngine/pull/14170)
-      - type: patch
-        path: fnf-psychengine-fixbuild.patch
+          type: json
+          url: https://api.github.com/repos/ShadowMario/FNF-PsychEngine/releases/latest
+          url-query: .zipball_url
+
+      # hxdiscord_rpc further depends on discord-rpc and rapidjson submodules.
+      - type: file
+        url: https://lib.haxe.org/p/hxdiscord_rpc/1.2.4/download/
+        sha256: 2b87ccc3ef9adc22e2de8c9ef82f3f2aa143add0622574e8ef8ac7d673fd6d6c
+        dest: psychengine-deps/
+        dest-filename: hxdiscord_rpc.zip
+      - type: archive
+        url: https://github.com/discord/discord-rpc/archive/963aa9f3e5ce81a4682c6ca3d136cddda614db33.zip
+        sha256: a91ec58748b6c55e2e91ab6288ad24a98306da99e24637a2ea97b19c37fc7ad2
+        dest: .haxelib/hxdiscord_rpc/1,2,4/project/discord-rpc/
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/discord/discord-rpc/releases/latest
+          url-query: .zipball_url
+      - type: archive
+        url: https://github.com/Tencent/rapidjson/archive/6089180ecb704cb2b136777798fa1be303618975.zip
+        sha256: dc82a52bc0eb329dfda1b94cf6376d5bba91d9765d29b27807baee9ea6d68179
+        dest: .haxelib/hxdiscord_rpc/1,2,4/project/rapidjson/
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Tencent/rapidjson/releases/latest
+          url-query: .zipball_url
+
       # redirect crash logs, mods directory and list to XDG_DATA_HOME
       - type: patch
         path: fnf-psychengine-fix_user_data.patch
@@ -76,18 +213,15 @@ modules:
     builddir: true
     buildsystem: simple
     build-commands:
-      # build
-      - |
-        export PATH=$PATH:$(pwd)/haxe
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/haxe
-        haxelib setup ./setup
-        for filename in psychengine-deps/*; do haxelib install $filename && rm $filename; done
-        ./haxe/haxelib run lime build Project.xml linux
-        mkdir -p /app/bin && cp -r export/release/linux/bin/* /app/bin/
+      # Install haxelib dependencies
+      - haxelib newrepo
+      - for filename in psychengine-deps/*; do haxelib install $filename && rm $filename; done
+      # Build and install
+      - ./haxe/haxelib run lime build Project.xml linux
+      - mkdir -p /app/bin && cp -r export/release/linux/bin/* /app/bin/
       # Install launchers
-      - |
-        install -m755 io.github.shadowmario.fnf-psychengine.sh -t /app/bin/
-        desktop-file-edit --set-key=Exec --set-value=io.github.shadowmario.fnf-psychengine.sh assets/meta/io.github.shadowmario.fnf-psychengine.desktop
-        install -Dm 644 assets/meta/io.github.shadowmario.fnf-psychengine.desktop -t /app/share/applications
-        install -Dm 644 assets/meta/io.github.shadowmario.fnf-psychengine.png -t /app/share/icons/hicolor/512x512/apps
-        install -Dm 644 assets/meta/io.github.shadowmario.fnf-psychengine.metainfo.xml -t /app/share/metainfo
+      - install -m755 ${FLATPAK_ID}.sh -t /app/bin/
+      - desktop-file-edit --set-key=Exec --set-value=${FLATPAK_ID}.sh assets/meta/${FLATPAK_ID}.desktop
+      - install -Dm 644 assets/meta/${FLATPAK_ID}.desktop -t /app/share/applications
+      - install -Dm 644 assets/meta/${FLATPAK_ID}.png -t /app/share/icons/hicolor/512x512/apps
+      - install -Dm 644 assets/meta/${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
