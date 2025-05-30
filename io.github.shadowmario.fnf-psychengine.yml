@@ -1,6 +1,6 @@
 app-id: io.github.shadowmario.fnf-psychengine
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: io.github.shadowmario.fnf-psychengine.sh
 
@@ -15,78 +15,30 @@ finish-args:
 
 modules:
   - name: fnf-psychengine
-    modules:
-      - name: gamemode
-        buildsystem: meson
-        config-opts:
-          - -Dwith-sd-bus-provider=no-daemon
-          - -Dwith-examples=false
-        sources:
-          - type: git
-            url: https://github.com/FeralInteractive/gamemode
-            tag: 1.8.1
-            x-checker-data:
-              type: git
-              tag-pattern: ^([\\d.]+)$
     sources:
-      - type: archive
-        url: https://github.com/HaxeFoundation/neko/releases/download/v2-3-0/neko-2.3.0-linux64.tar.gz
-        sha256: 26dda28d0a51407f26218ba9c2c355c8eb23cf2b0b617274b00e4b9170fe69eb
-        dest: haxe/
-        x-checker-data:
-          type: anitya
-          project-id: 10885
-          url-template: https://github.com/HaxeFoundation/neko/releases/download/v$version/neko-$version-linux64.tar.gz
-      - type: archive
-        url: https://github.com/HaxeFoundation/haxe/releases/download/4.3.6/haxe-4.3.6-linux64.tar.gz
-        sha256: 810e1752c8eb3065dbff54c050b20a712ce276f407741f0bf94696b454a597ad
-        dest: haxe/
-        x-checker-data:
-          type: anitya
-          project-id: 7883
-          url-template: https://github.com/HaxeFoundation/haxe/releases/download/$version/haxe-$version-linux64.tar.gz
-
-      # Haxe packages used by PsychEngine
-      - psychengine-haxelib-dependencies.yml
-
-      # Main PsychEngine repo
-      - type: git
-        url: https://github.com/ShadowMario/FNF-PsychEngine.git
-        # tag: "0.7.3"
-        commit: d64912e57120e27dc41304deae48097b6c1355d1
-        x-checker-data:
-          type: git
-          tag-pattern: ^([\\d.]+)$
-      # temporary fix for broken build in the repo (https://github.com/ShadowMario/FNF-PsychEngine/pull/14170)
-      - type: patch
-        path: fnf-psychengine-fixbuild.patch
-      # redirect crash logs, mods directory and list to XDG_DATA_HOME
-      - type: patch
-        path: fnf-psychengine-fix_user_data.patch
+      - type: file
+        url: https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/refs/tags/1.0.4/assets/meta/io.github.shadowmario.fnf-psychengine.desktop
+        sha256: 55776d11221dbcd960b89e5c916b0bf796e92119182198e6442999da9b99d7f6
+      - type: file
+        url: https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/refs/tags/1.0.4/assets/meta/io.github.shadowmario.fnf-psychengine.png
+        sha256: 75e6f7be86648b49a96a219a572f6663fb6466e2cca342aab525abeb23f250ea
+      - type: file
+        url: https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/refs/tags/1.0.4/assets/meta/io.github.shadowmario.fnf-psychengine.metainfo.xml
+        sha256: 621f8849d9dd5a1bd69413870f448bb18ec562a7feff1e267b197c110d88a5f5
       # launcher script
       - type: script
         dest-filename: io.github.shadowmario.fnf-psychengine.sh
         commands:
-          # Create mods directory if it doesn't exist yet
-          - if [[ ! -d $XDG_DATA_HOME/mods ]]; then mkdir $XDG_DATA_HOME/mods; fi
-          # launch game
-          - cd /app/bin
-          - ./PsychEngine
+          - zenity --error --title "PsychEngine is no longer maintained"
+            --text "The PsychEngine fork of FNF has been discontinued. There is a community provided Flatpak for mainline FNF available at <tt><b>https://github.com/Pucas01/FunkinFlatpak</b></tt>."
+
     builddir: true
     buildsystem: simple
     build-commands:
       # build
       - |
-        export PATH=$PATH:$(pwd)/haxe
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/haxe
-        haxelib setup ./setup
-        for filename in psychengine-deps/*; do haxelib install $filename && rm $filename; done
-        ./haxe/haxelib run lime build Project.xml linux
-        mkdir -p /app/bin && cp -r export/release/linux/bin/* /app/bin/
-      # Install launchers
-      - |
-        install -m755 io.github.shadowmario.fnf-psychengine.sh -t /app/bin/
-        desktop-file-edit --set-key=Exec --set-value=io.github.shadowmario.fnf-psychengine.sh assets/meta/io.github.shadowmario.fnf-psychengine.desktop
-        install -Dm 644 assets/meta/io.github.shadowmario.fnf-psychengine.desktop -t /app/share/applications
-        install -Dm 644 assets/meta/io.github.shadowmario.fnf-psychengine.png -t /app/share/icons/hicolor/512x512/apps
-        install -Dm 644 assets/meta/io.github.shadowmario.fnf-psychengine.metainfo.xml -t /app/share/metainfo
+        install -Dm755 io.github.shadowmario.fnf-psychengine.sh -t /app/bin/
+        desktop-file-edit --set-key=Exec --set-value=io.github.shadowmario.fnf-psychengine.sh io.github.shadowmario.fnf-psychengine.desktop
+        install -Dm 644 io.github.shadowmario.fnf-psychengine.desktop -t /app/share/applications
+        install -Dm 644 io.github.shadowmario.fnf-psychengine.png -t /app/share/icons/hicolor/512x512/apps
+        install -Dm 644 io.github.shadowmario.fnf-psychengine.metainfo.xml -t /app/share/metainfo
